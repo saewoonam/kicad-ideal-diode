@@ -13,7 +13,12 @@ repo = 'kicad-ideal-diode'
 list = list.filter( u => u.match(/\.(sch|lib|kicad_pcb)$/))
 // list = list.filter( u => u.match(/\.kicad_pcb$/))
 // let prefix = "https://raw.githubusercontent.com/"+user+"/"+repo+"/main/"+path+"/"
-let prefix = "https://raw.githubusercontent.com/"+user+"/"+repo+"/main/"
+let prefix; 
+if (process.env.GITHUB_REPOSITORY) {
+  prefix = "https://raw.githubusercontent.com/"+process.env.GITHUB_REPOSITORY+"/main/"
+} else {
+  prefix = "https://raw.githubusercontent.com/"+user+"/"+repo+"/main/"
+}
 let kicad_list = encodeURIComponent(list.map(a => prefix+a).join('\n'))
 src_url = "https://saewoonam.github.io/kicad-utils/viewer.html?url="+kicad_list;
 console.log('src_url', src_url);
