@@ -8,3 +8,4 @@ jobs:
       - uses: actions/setup-node@v1
       - run: yarn install
       - run: node index.js
+      - run: yarn run gh-pages -d web
