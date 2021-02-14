@@ -17,8 +17,7 @@ jobs:
           date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add generated.txt
-          git commit -m "update generated"
+          git commit -a -m "update generated"
           git push
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.0.0
