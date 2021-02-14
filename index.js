@@ -1,5 +1,7 @@
 const fs = require('fs');
 const folder='.'
+console.log('process.env', process.env);
+console.log('process.env.GITHUB_REPOSITORY', process.env.GITHUB_REPOSITORY);
 let list = []
 fs.readdirSync(folder).forEach(file => {
   console.log(file);
