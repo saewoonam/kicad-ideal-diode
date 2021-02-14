@@ -3,41 +3,19 @@ const folder='.'
 console.log('process.env', process.env);
 console.log('process.env.GITHUB_REPOSITORY', process.env.GITHUB_REPOSITORY);
 let list = []
+// Read all files in root directorry
 fs.readdirSync(folder).forEach(file => {
   console.log(file);
   list.push(file)
 });
-
-user = 'saewoonam'
-repo = 'kicad-ideal-diode'
+// filter file list down to sch, lib, and kicad_pcb files
 list = list.filter( u => u.match(/\.(sch|lib|kicad_pcb)$/))
-// list = list.filter( u => u.match(/\.kicad_pcb$/))
-// let prefix = "https://raw.githubusercontent.com/"+user+"/"+repo+"/main/"+path+"/"
 let prefix; 
-if (process.env.GITHUB_REPOSITORY) {
-  let branch_name = process.env.GITHUB_REF.split('/').pop()
-  prefix = "https://raw.githubusercontent.com/"+process.env.GITHUB_REPOSITORY;
-  prefix += "/"+branch_name+"/"
-} else {
-  prefix = "https://raw.githubusercontent.com/"+user+"/"+repo+"/main/"
-}
+let branch_name = process.env.GITHUB_REF.split('/').pop()
+prefix = "https://raw.githubusercontent.com/"+process.env.GITHUB_REPOSITORY;
+prefix += "/"+branch_name+"/"
+// build src for iframe
 let kicad_list = encodeURIComponent(list.map(a => prefix+a).join('\n'))
 src_url = "https://saewoonam.github.io/kicad-utils/viewer.html?url="+kicad_list;
 console.log('src_url', src_url);
 
-var getRepoInfo = require('git-repo-info');
-
-var info = getRepoInfo();
-
-
-console.log(info);
-console.log(__dirname);
-const simpleGit = require('simple-git');
-const git = simpleGit();
-git.listRemote(['--get-url'], (err, data) => {
-        if (!err) {
-            console.log('Remote url for repository at ' + __dirname + ':');
-            console.log(data);
-        }
-    });
-console.log('***** Done *****');
