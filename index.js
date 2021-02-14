@@ -15,7 +15,9 @@ list = list.filter( u => u.match(/\.(sch|lib|kicad_pcb)$/))
 // let prefix = "https://raw.githubusercontent.com/"+user+"/"+repo+"/main/"+path+"/"
 let prefix; 
 if (process.env.GITHUB_REPOSITORY) {
-  prefix = "https://raw.githubusercontent.com/"+process.env.GITHUB_REPOSITORY+"/master/"
+  let branch_name = process.env.GITHUB_REF.split('/').pop()
+  prefix = "https://raw.githubusercontent.com/"+process.env.GITHUB_REPOSITORY;
+  prefix += "/"+branch_name+"/"
 } else {
   prefix = "https://raw.githubusercontent.com/"+user+"/"+repo+"/main/"
 }
