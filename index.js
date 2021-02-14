@@ -21,5 +21,5 @@ console.log('src_url', src_url);
 
 let html_wrapper = `<html><iframe src="${src_url}" title="kicad-viewer" style="width: 100%; height: 100%;"></iframe></html>`
 console.log(html_wrapper)
-fs.writeFileSync('web/index2.html', html_wrapper)
+fs.writeFileSync('web/index.html', html_wrapper)
 console.log('***** Done *****')

@@ -14,7 +14,7 @@ jobs:
       - run: node index.js
       - name: try to push a new file to the repo
         run: |
-          date > generated.txt
+          # date > generated.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
           git commit -a -m "update generated"
